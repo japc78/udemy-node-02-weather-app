@@ -8,15 +8,15 @@ const menuOpts = [
         message: 'What do you wish to do?',
         choices: [
             {
-                value: '1',
+                value: 1,
                 name: `${'1'.green}. Search city`
             },
             {
-                value: '2',
+                value: 2,
                 name: `${'2'.green}. History`
             },
             {
-                value: '0',
+                value: 0,
                 name: `${'0'.green}. Exit`
             },
         ]
