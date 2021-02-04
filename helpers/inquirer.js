@@ -67,6 +67,28 @@ const readInput = async(message) => {
     return desc;
 }
 
+const showListPlaces = async(places = []) => {
+    const choices = places.map((place, i) => {
+        const idx = `${i + 1}.`.green;
+        return {
+            value: place.id,
+            name: `${idx} ${place.name}`
+        }
+    });
+
+    choices.unshift(cancelOption);
+
+    const question = [{
+        type: 'list',
+        name: 'id',
+        message: 'Select place',
+        choices
+    }]
+
+    const { id } = await inquirer.prompt(question);
+    return id;
+}
+
 const cancelOption = {
     value: '0',
     name: '0. '.green + 'Cancel'
@@ -88,5 +110,6 @@ module.exports = {
     pause,
     readInput,
     confirmAction,
+    showListPlaces
 }
 
