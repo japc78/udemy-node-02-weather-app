@@ -1,5 +1,5 @@
 const { inquirerMenu, pause, readInput } = require('./helpers/inquirer');
-const Searches = require('./models/Searches');
+const Search = require('./models/Search');
 
 require('colors');
 
@@ -8,7 +8,7 @@ console.clear();
 const main = async ()=> {
     let opt;
 
-    const searches = new Searches();
+    const searches = new Search();
 
     do {
         opt = await inquirerMenu();
@@ -20,6 +20,7 @@ const main = async ()=> {
                 console.log(place);
 
                 // TODO Search the places
+                se
 
                 // TODO Select one place
 

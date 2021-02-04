@@ -1,5 +1,4 @@
-
-class Searches {
+class Search {
     historial = [];
 
     constructor() {
@@ -15,4 +14,4 @@ class Searches {
     }
 }
 
-module.exports = Searches;
+module.exports = Search;
