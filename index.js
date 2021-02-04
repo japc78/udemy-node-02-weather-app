@@ -1,14 +1,17 @@
 const { inquirerMenu, pause, readInput } = require('./helpers/inquirer');
 const Search = require('./models/Search');
 
+require('dotenv').config()
 require('colors');
 
-console.clear();
+// console.log(process.env);
+// console.log(process.env.MAPBOX_KEY);
 
+console.clear();
 const main = async ()=> {
     let opt;
 
-    const searches = new Search();
+    const search = new Search();
 
     do {
         opt = await inquirerMenu();
@@ -20,7 +23,7 @@ const main = async ()=> {
                 console.log(place);
 
                 // TODO Search the places
-                se
+                await search.city(place);
 
                 // TODO Select one place
 
