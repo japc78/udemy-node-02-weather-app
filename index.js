@@ -32,14 +32,18 @@ const main = async ()=> {
                 // console.log(selectedPlace);
 
                 // TODO Get data weather of the place
+                const weatherPlace = await search.weatherPlaceFromCoordinates(selectedPlace.lat, selectedPlace.lng);
+                // console.log(weatherPlace);
 
                 // TODO Show weather result of the place
                 console.log('\nCity details: \n'.green);
                 console.log('City: ', selectedPlace.name );
                 console.log('Lat: ', selectedPlace.lat );
                 console.log('Lng: ', selectedPlace.lng);
-                console.log('Min: ', );
-                console.log('Max: ', );
+                console.log('Temp: ', weatherPlace.temp );
+                console.log('Min: ', weatherPlace.temp_min);
+                console.log('Max: ', weatherPlace.temp_max);
+                console.log('Weather: ', weatherPlace.desc);
                 break;
 
             case 2:
