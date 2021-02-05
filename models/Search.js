@@ -1,11 +1,14 @@
+const fs = require('fs');
 const axios = require('axios').default;
 
 
 class Search {
-    historial = [];
+    history = [];
+    dataPath = './db/data.json';
 
     constructor() {
-        // TODO Read DB if exist
+        // Read DB if exist
+        this.loadData();
 
     }
 
@@ -23,6 +26,12 @@ class Search {
             'units': 'metric',
             'lang': 'en'
         }
+    }
+
+    get historyCapitalized() {
+        return this.history.map(place => {
+            return place.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+        })
     }
 
     async city( place = '') {
@@ -70,6 +79,43 @@ class Search {
             console.log(error);
         }
     }
+
+    addHistory(place = '') {
+        // NO duplicate entries
+        if (this.history.includes(place.toLocaleLowerCase())) {
+            return;
+        }
+
+        // Only 6 places in the history
+        this.history = this.history.splice(0,5);
+
+        this.history.unshift( place.toLocaleLowerCase());
+        // this.history = [...new Set(this.history)];
+
+        // Save data to file
+        this.saveData();
+    }
+
+    saveData() {
+        const payload = {
+            history: this.history
+        }
+
+        fs.writeFileSync(this.dataPath, JSON.stringify(payload));
+    }
+
+    loadData(){
+
+        try {
+            if (!fs.existsSync(this.dataPath)) return;
+            const info = fs.readFileSync(this.dataPath, {encoding: 'utf-8'}) ;
+            const { history } = JSON.parse(info);
+            this.history = history;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 }
 
 module.exports = Search;

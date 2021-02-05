@@ -28,8 +28,14 @@ const main = async ()=> {
                 // Select one place
                 const id = await showListPlaces(places);
                 // console.log({ id });
+                if (id === '0') continue;
+
+
                 const selectedPlace = places.find( place => place.id = id);
                 // console.log(selectedPlace);
+
+                // Save data
+                search.addHistory(selectedPlace.name);
 
                 // TODO Get data weather of the place
                 const weatherPlace = await search.weatherPlaceFromCoordinates(selectedPlace.lat, selectedPlace.lng);
@@ -48,6 +54,10 @@ const main = async ()=> {
 
             case 2:
                 // Show the history of search
+                search.historyCapitalized.forEach((place,i) => {
+                    const idx = `${i + 1}.`.green;
+                    console.log(`${idx} ${place}`);
+                })
 
                 break;
 
